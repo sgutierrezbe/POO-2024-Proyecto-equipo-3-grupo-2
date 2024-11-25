@@ -45,3 +45,57 @@ array pedidos
 
 Vendedor
 atributos
+srt Nombre
+int id
+str email
+array productos
+obj bodega
+
+direccion
+atributos
+
+str pais
+int postalcode
+str direccion 
+str datosExtra
+
+bodega
+
+int id
+obj direccion
+array paquetes
+
+
+empresaLogistica
+
+str Nombre
+boolean internacional
+obj bodega
+array paquetes
+
+Paquete
+
+int id
+float alto
+float ancho
+float precioDeclarado
+float peso
+array pedidos
+float impuestos
+
+producto
+
+int id
+str Nombre
+str descripcion
+float precio
+obj vendedor
+
+pedido
+
+int id
+obj fecha/hora
+float precio
+array productos
+obj comprador
+
