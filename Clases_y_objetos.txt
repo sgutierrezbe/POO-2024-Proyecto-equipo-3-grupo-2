@@ -1,0 +1,47 @@
+El proyecto tendra las siguientes clases
+
+Comprador
+Vendedor
+Direccion
+Bodega
+empresaLogistica
+Paquete
+Producto
+Pedido
+
+El funcionamiento del programa sera el siguientes
+
+Hay principalmente, 3 agentes, el vendedor, el comprador, y la/las empresas logisticas
+el comprador genera un pedido, de 1 o multiples productos, estos productos si son pedidos
+juntos, o en algun momento se encuentran en la misma bodega, se combinan en un solo Paquete.
+
+El vendedor tiene una bodega, la bodega tiene una direccion, la empresaLogistica lo recoge,
+y lo lleva donde el comprador, dependiendo, en algunos casos se lleva a otra bodega, donde 
+otra empresaLogistica.
+
+Se plantean multiples funcionalidades
+La inicial seria crearPedido, esta funcionalidad nescesita un comprador, y un vendedor, el
+vendedor tiene un producto en una bodega, esto genera un paquete, a este paquete se le asigna
+una empresaLogistica, si este lugar de origen, es de un pais diferente al de el comprador
+se nescesitara al menos 2 empresas logisticas, una internacional (por ejemplo Cainiao o mail
+americas), y una local (interrapidisimo, 4-72, etc...) estas empresas tambien tienen La
+responsabilidad de agupar los paquetes segun el criterio de la siguiente funcionalidad.
+
+La funcionalidad seria con respecto a la declaracion de impuestos en aduanas, ya que para
+pedidos del exterior, depende del pais de origen, ya que paises con TLC tienen beneficios 
+(Estados Unidos, México, Chile y la Unión Europea), y especialmente, que las empresaLogistica
+a la hora de juntar paqutes, solo lo haga si la combinacion de los precios declarados es menor
+a 200usd, y peso menor  50kg, ya que si supera estas condiciones, se genera cobro de iva y
+aranceles, y por el peso, podria ser considerado carga comercial.
+
+Comprador
+Atributos
+
+srt Nombre
+int id
+str email
+obj direccion
+array pedidos
+
+Vendedor
+atributos
