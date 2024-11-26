@@ -1,3 +1,11 @@
+En el mundo actual, el comercio electrónico se ha convertido en una parte fundamental de 
+la economía global. Empresas como AliExpress, Amazon y MercadoLibre permiten que vendedores 
+y compradores interactúen desde diferentes regiones y países. Sin embargo, este proceso 
+involucra una logística compleja para gestionar pedidos, productos, transporte, impuestos, 
+y entregas, especialmente en casos de envíos internacionales. Esto requiere la coordinación 
+de múltiples actores: vendedores, compradores, y empresas logísticas locales e internacionales.
+
+
 El proyecto tendra las siguientes clases
 
 Comprador
@@ -20,19 +28,60 @@ y lo lleva donde el comprador, dependiendo, en algunos casos se lleva a otra bod
 otra empresaLogistica.
 
 Se plantean multiples funcionalidades
-La inicial seria crearPedido, esta funcionalidad nescesita un comprador, y un vendedor, el
-vendedor tiene un producto en una bodega, esto genera un paquete, a este paquete se le asigna
-una empresaLogistica, si este lugar de origen, es de un pais diferente al de el comprador
-se nescesitara al menos 2 empresas logisticas, una internacional (por ejemplo Cainiao o mail
-americas), y una local (interrapidisimo, 4-72, etc...) estas empresas tambien tienen La
-responsabilidad de agupar los paquetes segun el criterio de la siguiente funcionalidad.
 
-La funcionalidad seria con respecto a la declaracion de impuestos en aduanas, ya que para
-pedidos del exterior, depende del pais de origen, ya que paises con TLC tienen beneficios 
-(Estados Unidos, México, Chile y la Unión Europea), y especialmente, que las empresaLogistica
-a la hora de juntar paqutes, solo lo haga si la combinacion de los precios declarados es menor
-a 200usd, y peso menor  50kg, ya que si supera estas condiciones, se genera cobro de iva y
-aranceles, y por el peso, podria ser considerado carga comercial.
+La inicial seria crearPedido,El comprador genera un pedido que incluye uno o varios productos 
+de un vendedor. El sistema agrupa los productos en un paquete, asigna la bodega de origen y 
+selecciona una empresa logística adecuada, algunas mas rapidas, pero mas costosas.
+
+Objetos involucrados:
+
+Comprador: Inicia el proceso al seleccionar productos y confirmar la compra.
+Vendedor: Proporciona los productos seleccionados y los envía desde su bodega.
+Paquete: Agrupa los productos comprados en una unidad que será enviada al comprador.
+Proceso:
+
+El comprador selecciona productos, empresa logistica y confirma el pedido.
+El sistema verifica la disponibilidad de los productos en las bodegas del vendedor.
+Se crea un objeto Pedido y se agrupan los productos en un Paquete.
+Se asigna una empresa logística al paquete, considerando si el envío será nacional o internacional.
+Impacto en los objetos:
+
+El historial del comprador se actualiza con el nuevo pedido.
+El inventario del vendedor se actualiza al reducir las unidades disponibles.
+Se genera un nuevo paquete con los datos del pedido y el estado inicial de "pendiente de envío".
+
+La funcionalidad siguiente se relaciona con el pago de impuestos en aduanas.
+Antes de la entrega, el sistema calcula si el paquete debe pagar impuestos según su precio declarado,
+peso y país de origen. Si los valores exceden los límites permitidos, se calcula el IVA y aranceles.
+
+Objetos involucrados:
+
+Paquete: Contiene los datos del valor declarado, peso, y país de origen.
+Direccion: Determina la ubicación del comprador y si es necesario calcular impuestos.
+EmpresaLogistica: Realiza la entrega final del paquete al comprador.
+Comprador: En caso de cobros extra, se agregan a la cuenta de cobro del comprador.
+Proceso:
+
+El sistema verifica el país de origen del paquete y si aplica un tratado de libre comercio (TLC).
+Calcula los impuestos (IVA y aranceles) si el valor declarado supera los 200 USD o el peso excede los 50 kg.
+La empresa logística entrega el paquete al comprador, actualizando el estado del paquete a "entregado".
+Impacto en los objetos:
+
+El paquete registra el monto de impuestos (si aplica) y se marca como entregado.
+La empresa logística actualiza su lista de paquetes pendientes.
+La dirección del comprador registra el paquete como recibido.
+
+Finalmente, la ultima funcionalidad se relaciona con el seguimiento del progreso de envio de los paquetes
+Esta funcionalidad permite al comprador y al sistema rastrear el estado y los pasos de un paquete desde la 
+creación del pedido hasta su entrega. El seguimiento se realiza mediante un historial de eventos almacenado en
+el atributo historial del objeto Pedido. Cada evento contiene una descripción de la acción realizada, 
+junto con la fecha y hora en que ocurrió.
+
+Objetos involucrados:
+Pedido: Registra los eventos del paquete relacionado con el pedido.
+Paquete: Proporciona detalles logísticos, como su estado y ubicación actual.
+Comprador: Hace la solicitud de el seguimiento
+
 
 Comprador
 Atributos
@@ -45,3 +94,60 @@ array pedidos
 
 Vendedor
 atributos
+srt Nombre
+int id
+str email
+array productos
+obj bodega
+
+direccion
+atributos
+
+str pais
+int postalcode
+str region
+str direccion 
+str datosExtra
+
+bodega
+
+int id
+obj direccion
+array paquetes
+
+
+empresaLogistica
+
+str Nombre
+boolean internacional
+obj bodega
+array paquetes
+
+Paquete
+
+int id
+float alto
+float ancho
+float precioDeclarado
+float peso
+array pedidos
+float impuestos
+boolean entregado
+
+producto
+
+int id
+str Nombre
+str descripcion
+float precio
+obj vendedor
+
+pedido
+
+int id
+obj fecha/hora
+float precio
+array productos
+obj comprador
+boolean finalizado
+ArrayList historial de eventos
