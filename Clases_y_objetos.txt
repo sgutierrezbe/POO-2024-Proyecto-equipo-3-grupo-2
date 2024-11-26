@@ -28,6 +28,7 @@ y lo lleva donde el comprador, dependiendo, en algunos casos se lleva a otra bod
 otra empresaLogistica.
 
 Se plantean multiples funcionalidades
+
 La inicial seria crearPedido,El comprador genera un pedido que incluye uno o varios productos 
 de un vendedor. El sistema agrupa los productos en un paquete, asigna la bodega de origen y 
 selecciona una empresa logística adecuada, algunas mas rapidas, pero mas costosas.
@@ -69,6 +70,18 @@ Impacto en los objetos:
 El paquete registra el monto de impuestos (si aplica) y se marca como entregado.
 La empresa logística actualiza su lista de paquetes pendientes.
 La dirección del comprador registra el paquete como recibido.
+
+Finalmente, la ultima funcionalidad se relaciona con el seguimiento del progreso de envio de los paquetes
+Esta funcionalidad permite al comprador y al sistema rastrear el estado y los pasos de un paquete desde la 
+creación del pedido hasta su entrega. El seguimiento se realiza mediante un historial de eventos almacenado en
+el atributo historial del objeto Pedido. Cada evento contiene una descripción de la acción realizada, 
+junto con la fecha y hora en que ocurrió.
+
+Objetos involucrados:
+Pedido: Registra los eventos del paquete relacionado con el pedido.
+Paquete: Proporciona detalles logísticos, como su estado y ubicación actual.
+Comprador: Hace la solicitud de el seguimiento
+
 
 Comprador
 Atributos
@@ -137,4 +150,4 @@ float precio
 array productos
 obj comprador
 boolean finalizado
-
+ArrayList historial de eventos
