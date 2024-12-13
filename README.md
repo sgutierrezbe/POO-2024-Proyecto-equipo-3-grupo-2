@@ -29,11 +29,11 @@ Las 5 Funcionalides del programa son:<br> **1 => Recibir solicitudes**<br>**2 =>
 La primera funcionalidad que es el núcleo del programa y la única con interacción constante con el usuario.<br>
 El programa está orientado a recibir un único usuario a la vez, sin embargo puede interactuar con varios usuarios. Las opciones desplegadas están o no disponibles dependiendo de la cantidad de esta opción disponible, o si ya está siendo solicitada por otro usuario.<br>
 #### **Primera Interacción: Preguntar**: 
-![diagrama preguntar](diagramas_funciones/funcionalidad_1/preguntar.png)
+![diagrama preguntar](diagramas_funcionalidades/funcionalidad_1/preguntar.png)
 <!-- <img src="diagramas_funciones/funcionalidad_1/preguntar.png" alt="diagrama preguntar"/> -->
 Gira en torno al usuario, es la primera parte y es el registro o inicio de sesión, es CRUD, solo lee la información proporcionada por el usuario y llama a la función **Manejar Excepciones** en caso de ser necesario (Casos necesarios son marcados con rojo).<br> #Añadir las clases que interactúan, describir los métodos planteados.
 #### **Segunda Interacción: Tiempo de ejecución**
-![diagrama tiempo de ejecución](diagramas_funciones/funcionalidad_1/tiempos.png)
+![diagrama tiempo de ejecución](diagramas_funcionalidades/funcionalidad_1/tiempos.png)
 Gira en torno al usuario, está conectada principalmente con la función **calcular costos y tiempos**, A la cual llama cuando es necesario. Presenta al usuario con las opciones y crea el carro de compras, separa servicios y productos, guarda el tiempo de servicio contratado. 
 ## Impacto clases y objetos
 Las 3 funcionalides interactúan entre sí para los calculos del costo, el tiempo de envío y la llegada de los productos. Las clases Paquete, Bodega, Organizador y Domiciliario tienen estados, que dependen de la clase tiempo y de los límites dados por su capacidad de contención de otros objetos, Las clases Vendedor y Empresa (con sus subclases) interactúan con los objetos de las demás clases y determinan su capacidad de continuar, principalmente dependen de las instancias de Comprador para manetener dinero en sus carteras, el dinero se mueve constantemente y depende del tiempo, cuando no hay dinero los vendedores no pueden satisfacer a los Compradores y las empresas son Destruidas (Caen en bancarrota). <br>
