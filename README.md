@@ -124,7 +124,7 @@ Esta funcionalidad describe la solución del programa para vender productos y/o 
 ### Funcionalidad 3: Envío
 ---
 #### Tres Interacciones =>
-##### Actualización de Datos:
+##### Cálculo de costos:
 **Objetos Involucrados:** ---.<br>
 ##### ---:
 **Objetos Involucrados:** ---.<br>
