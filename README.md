@@ -122,14 +122,57 @@ Esta funcionalidad describe la solución del programa para vender productos y/o 
 **Objetos Involucrados:** ---<br>
 
 ### Funcionalidad 3: Envío
----
+Esta funcionalidad se encarga de todo lo relacionado con el envio del producto, el servicio de entrega de los productos y el acceso a servicios. El proceso empieza con los vendedores y termina con los usuarios, utilizando los domiciliarios como intermediario en el proceso. Se involucran factores como la ubicación, distancia, costo de envio, disponibilidad de domiciliarios, tiempos de entrega.
 #### Tres Interacciones =>
-##### Cálculo de costos:
-**Objetos Involucrados:** ---.<br>
-##### ---:
-**Objetos Involucrados:** ---.<br>
-##### ---:
-**Objetos Involucrados:** ---<br>
+##### Asignacion entrega:
+El sistema consulta la clase Usuario para recuperar la dirección almacenada o solicitar al cliente que la ingrese o confirme.
+ Si la dirección está incompleta o fuera de la zona de cobertura, se solicita al usuario que ajuste los datos o elige un punto de entrega alternativo.
+ El sistema consulta la clase Domiciliario para identificar los repartidores disponibles en la zona más cercana al inventario.
+ Se consideran factores como:
+•	Distancia entre el domiciliario y la ubicación del usuario.
+•	Carga de trabajo actual del domiciliario.
+Cálculo de costos:
+Utilizando la clase Tiempo y las coordenadas del cliente, se calcula:
+Tiempo estimado de entrega: Basado en la distancia y el tráfico.
+Costos de envío: Variables según:
+Distancia del cliente.
+Clima (envíos en condiciones adversas pueden tener tarifas más altas).
+Urgencia del pedido (entrega express).
+El domiciliario más adecuado es asignado y notificado.
+El usuario recibe un resumen con:
+•	Nombre del domiciliario.
+•	Tiempo estimado de llegada.
+•	Costo del envío.
+•	Opción para cancelar o reprogramar el envío antes de iniciar.
+
+**Objetos Involucrados:** Usuario, Domiciliario, Inventario.<br>
+
+##### Seguimiento:
+Una vez que el domiciliario recoge el pedido, el estado del envío cambia a "en camino".
+ Se activa el seguimiento en tiempo real (simulado con cálculos de posición y tiempo estimado).
+ La clase Domiciliario proporciona actualizaciones sobre la ubicación del repartidor.
+ La clase Tiempo recalcula el tiempo estimado en función del progreso real y posibles demoras (como tráfico o clima).
+El usuario recibe alertas en diferentes momentos clave, como:
+•	"Tu pedido ha sido recogido."
+•	"El domiciliario está cerca de tu ubicación."
+Si ocurre un retraso, se notifica automáticamente junto con la causa y el tiempo adicional estimado.
+Si el usuario reporta un problema (pedido incorrecto o retraso significativo), el sistema:
+•	Genera una alerta para soporte al cliente.
+•	Ofrece opciones como reembolso parcial o reprogramación.
+
+**Objetos Involucrados:** Tiempo, Servicio, Domiciliario.<br>
+##### Confirmacion:
+ Una vez que el domiciliario marca el pedido como "entregado", el sistema solicita al usuario que confirme la recepción.
+ Si el usuario no confirma en un tiempo predefinido, se envía un recordatorio o el sistema asume la entrega como completada automáticamente.
+Si el usuario informa un problema, se activa un flujo de resolución que incluye:
+•	Contacto directo con soporte.
+•	Opciones para reemplazo, reembolso o nuevas entregas.
+ El sistema solicita al usuario calificar:
+•	La calidad del producto/servicio recibido.
+•	La experiencia con el domiciliario (puntualidad, amabilidad).
+ Esta información se almacena en la clase Domiciliario y Producto/Servicio para optimizar futuras interacciones.
+
+**Objetos Involucrados:** Usuario, Producto/Servicio, Domiciliario.<br>
 ### Funcionalidad 4: Calificaciones y puntos
 ---
 #### Tres Interacciones =>
